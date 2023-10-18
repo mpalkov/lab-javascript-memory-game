@@ -25,6 +25,22 @@ const cards = [
   { name: 'thor', img: 'thor.jpg' }
 ];
 
+const turnCard = (card) => {
+	card.classList.toggle('turned');
+};
+
+const setCardAsTurned = (card) => {
+ // UNFINISHED
+};
+
+const onCardClick = (card) => {
+	turnCard(card);
+	
+	setTimeout((card) => {
+		turnCard(card);
+	}, 1000);
+};
+
 const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', (event) => {
@@ -45,7 +61,8 @@ window.addEventListener('load', (event) => {
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
       // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+      console.log(`Card clicked: ${card}`, card);
+	  onCardClick(card);
     });
   });
 });
