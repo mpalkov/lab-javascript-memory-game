@@ -36,10 +36,6 @@ const turnCard = (card) => {
 	card.classList.toggle('turned');
 };
 
-const setCardAsTurned = (card) => {
- // UNFINISHED
-};
-
 const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', (event) => {
@@ -61,31 +57,25 @@ window.addEventListener('load', (event) => {
     card.addEventListener('click', () => {
       turnCard(card);
       let picked = memoryGame.pickedCards;
-      console.log(picked);
       if (picked.length < 2)
       {
         console.log("picked < 2")
           picked.push(card);
       }
       if (picked.length === 2) {
-        console.log ("picked === 2")
         const card1 = picked[0];
-        console.log("picked[0]: ", picked[0], memoryGame.pickedCards[0], memoryGame.pickedCards[0] === picked[0]);
-        console.log("picked[0].name: ", picked[0].getAttribute("name"), memoryGame.pickedCards[0].getAttribute("name"));
         const card2 = picked[1];
         const name1 = card1.getAttribute("data-card-name");
         const name2 = card2.getAttribute("data-card-name");
-        console.log("name1: ", name1, name2)
         // if pair is correct
         if (memoryGame.checkIfPair(name1, name2)) {
-          console.log("PAIR FOUND!", picked);
           //get class blocked to both cards
           card1.classList.add("blocked");
           card2.classList.add("blocked");
           }
+          // if pair is not correct, turn the cards back
           else {
             setTimeout(() => {
-              console.log("returning cards", picked[0]);
               turnCard(picked[0]); //this works
               turnCard(picked[1]); //this does not work
             }, 2000);
@@ -93,11 +83,11 @@ window.addEventListener('load', (event) => {
           // clean list of pickedcards
           memoryGame.pickedCards = [];
           const isFinished = memoryGame.checkIfFinished();
+          // if game is finished, display You Won! and hide the cards.
           if (isFinished) {
             setTimeout(() => {
               /* const winText = document.createElement("h1");
-              winText.innerHTML = "YOU WON!";
-              console.log(winText); */
+              winText.innerHTML = "YOU WON!"; */
               document.querySelector('#memory-board').innerHTML = '<h1>YOU WON!</h1>';
           }, 500);
           }

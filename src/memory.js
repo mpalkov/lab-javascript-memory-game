@@ -12,20 +12,6 @@ class MemoryGame {
     if (this.cards === undefined) {
       return undefined;
     }
-    /*
-      // My own Shuffle method, UNFINISHED 
-      // approach: First make an array with indexnumbers of the cards in ascending order
-      // then shuffle the order and put the corresponding cards in this order in a new array which becomes value of this.cards variable.
-    const totalCards = this.cards.length;
-    console.log("TOTALCARDS: ",totalCards);
-    const shuffleOrder = Array.from(Array(totalCards).keys());
-    console.log(shuffleOrder);
-    shuffleOrder.forEach((card) => {
-     const randomNbr = Math.floor(Math.random() * totalCards);
-  
-
-    });
-       */
     let len = this.cards.length;
     while (len > 0) {
       len--;
