@@ -4,10 +4,11 @@ class MemoryGame {
     this.pickedCards = [];
     this.pairsClicked = 0;
     this.pairsGuessed = 0;
+    this.shuffleCards();
   }
 
   shuffleCards() {
-    console.log("CardsArray is: ",cardsArray);
+   // console.log("CardsArray is: ",cardsArray);
     if (this.cards === undefined) {
       return undefined;
     }

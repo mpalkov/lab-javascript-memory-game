@@ -33,14 +33,6 @@ const setCardAsTurned = (card) => {
  // UNFINISHED
 };
 
-const onCardClick = (card) => {
-	turnCard(card);
-	
-	setTimeout((card) => {
-		turnCard(card);
-	}, 1000);
-};
-
 const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', (event) => {
@@ -60,9 +52,44 @@ window.addEventListener('load', (event) => {
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
-      // TODO: write some code here
-      console.log(`Card clicked: ${card}`, card);
-	  onCardClick(card);
+      turnCard(card);
+      let picked = memoryGame.pickedCards;
+      console.log(picked);
+      if (picked.length < 2)
+      {
+        console.log("picked < 2")
+          picked.push(card);
+      }
+      if (picked.length === 2) {
+        console.log ("picked === 2")
+        const card1 = picked[0];
+        console.log("picked[0]: ", picked[0], memoryGame.pickedCards[0], memoryGame.pickedCards[0] === picked[0]);
+        console.log("picked[0].name: ", picked[0].getAttribute("name"), memoryGame.pickedCards[0].getAttribute("name"));
+        const card2 = picked[1];
+        const name1 = card1.getAttribute("data-card-name");
+        const name2 = card2.getAttribute("data-card-name");
+        console.log("name1: ", name1, name2)
+        // if pair is correct
+        if (memoryGame.checkIfPair(name1, name2)) {
+          console.log("PAIR FOUND!", picked);
+          //get class blocked to both cards
+          card1.classList.add("blocked");
+          card2.classList.add("blocked");
+          }
+          else {
+            setTimeout(() => {
+              console.log("returning cards", memoryGame.pickedCards[0]);
+              turnCard(memoryGame.pickedCards[0]);
+              turnCard(memoryGame.pickedCards[1]);
+            }, 2000);
+          }
+          // clean list of pickedcards
+          memoryGame.pickedCards = [];
+          const isFinished = memoryGame.checkIfFinished();
+          if (isFinished) {
+            alert("BRAVO!!!");
+          }
+        }
     });
   });
 });
