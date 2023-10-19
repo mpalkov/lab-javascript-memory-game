@@ -25,6 +25,13 @@ const cards = [
   { name: 'thor', img: 'thor.jpg' }
 ];
 
+const updateHTMLScore = () => {
+  const pairsClicked = document.querySelector("#pairs-clicked");
+  const pairsGuessed = document.querySelector("#pairs-guessed");
+  pairsClicked.innerHTML = `${memoryGame.pairsClicked}`;
+  pairsGuessed.innerHTML = `${memoryGame.pairsGuessed}`;
+}
+
 const turnCard = (card) => {
 	card.classList.toggle('turned');
 };
@@ -78,16 +85,21 @@ window.addEventListener('load', (event) => {
           }
           else {
             setTimeout(() => {
-              console.log("returning cards", memoryGame.pickedCards[0]);
-              turnCard(memoryGame.pickedCards[0]);
-              turnCard(memoryGame.pickedCards[1]);
+              console.log("returning cards", picked[0]);
+              turnCard(picked[0]); //this works
+              turnCard(picked[1]); //this does not work
             }, 2000);
           }
           // clean list of pickedcards
           memoryGame.pickedCards = [];
           const isFinished = memoryGame.checkIfFinished();
           if (isFinished) {
-            alert("BRAVO!!!");
+            setTimeout(() => {
+              /* const winText = document.createElement("h1");
+              winText.innerHTML = "YOU WON!";
+              console.log(winText); */
+              document.querySelector('#memory-board').innerHTML = '<h1>YOU WON!</h1>';
+          }, 500);
           }
         }
     });

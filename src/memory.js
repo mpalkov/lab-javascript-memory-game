@@ -41,10 +41,13 @@ class MemoryGame {
     this.pairsClicked++;
     if (card1 === card2) {
       this.pairsGuessed++;
+      updateHTMLScore();
       return true;
     }
-    else
+    else{
+      updateHTMLScore();
       return false;
+    }
   }
 
   checkIfFinished() {
